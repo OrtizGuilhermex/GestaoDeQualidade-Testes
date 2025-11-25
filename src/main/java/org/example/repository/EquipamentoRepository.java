@@ -2,6 +2,7 @@ package org.example.repository;
 
 import org.example.database.Conexao;
 import org.example.model.Equipamento;
+import org.example.model.Falha;
 
 import java.sql.*;
 
