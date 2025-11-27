@@ -1,6 +1,8 @@
 package org.example.service.falha;
 
+import org.example.model.Equipamento;
 import org.example.model.Falha;
+import org.example.repository.EquipamentoRepository;
 import org.example.repository.FalhaRepository;
 
 import java.sql.SQLException;
@@ -10,8 +12,11 @@ public class FalhaServiceImpl implements FalhaService{
     @Override
     public Falha registrarNovaFalha(Falha falha) throws SQLException {
        FalhaRepository falhaRepository = new FalhaRepository();
+       EquipamentoRepository equipamentoRepository = new EquipamentoRepository();
 
-       Falha equipamentoEncontrado = falhaRepository.registrarNovaFalha(falha);
+       falhaRepository.registrarNovaFalha(falha);
+       Equipamento equipamentoEncontrado = equipamentoRepository.buscarEquipamento(falha.getId());
+
        if(equipamentoEncontrado == null){
            throw new IllegalArgumentException("Equipamento não encontrado!");
        } else {

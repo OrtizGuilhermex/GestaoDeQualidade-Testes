@@ -5,7 +5,6 @@ import org.example.model.Falha;
 
 import java.math.BigDecimal;
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +34,8 @@ public class FalhaRepository {
             stmt.setBigDecimal(6,falha.getTempoParadaHoras());
             stmt.executeUpdate();
 
+            falha.setStatus("ABERTA");
+
             ResultSet rs = stmt.getGeneratedKeys();
 
             if(rs.next()){
@@ -47,25 +48,16 @@ public class FalhaRepository {
 
     public Falha atualizarEquipamentoCriticidade(Falha falha) throws SQLException {
         String query = """
-                UPDATE Falha
-                    SET equipamentoId = ?,
-                        dataHoraOcorrencia = ?,
-                        descricao = ?,
-                        criticidade = ?,
-                        status = ?,
-                        tempoParadaHoras = ?
+                UPDATE Equipamento e
+                JOIN Falha a ON e.id = a.equipamentoId
+                    SET statusOperacional = ?
                 WHERE criticidade = 'CRITICA'
                 """;
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(query)){
 
-            stmt.setLong(1, falha.getEquipamentoId());
-            stmt.setTimestamp(2,java.sql.Timestamp.valueOf(falha.getDataHoraOcorrencia()));
-            stmt.setString(3,falha.getDescricao());
-            stmt.setString(4, falha.getCriticidade());
-            stmt.setString(5, "EM_ANDAMENTO");
-            stmt.setBigDecimal(6,falha.getTempoParadaHoras());
+            stmt.setString(1,"EM_MANUTENCAO" );
             stmt.executeUpdate();
         }
         return falha;
