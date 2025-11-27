@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.example.database.Conexao;
+import org.example.model.Equipamento;
 import org.example.model.Falha;
 
 import java.math.BigDecimal;
@@ -93,6 +94,33 @@ public class FalhaRepository {
             }
         }
         return falhasAbertas;
+    }
+
+    public Falha buscarFalhaPorId(long id) throws SQLException {
+        String selectQuery = """
+            SELECT * FROM Falha
+            WHERE id = ?
+            """;
+
+        try(Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(selectQuery)) {
+            stmt.setLong(1,id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                return new Falha(
+                        rs.getLong("id"),
+                        rs.getLong("equipamentoId"),
+                        rs.getTimestamp("dataHoraOcorrencia").toLocalDateTime(),
+                        rs.getString("descricao"),
+                        rs.getString("criticidade"),
+                        rs.getString("status"),
+                        rs.getBigDecimal("tempoParadaHoras")
+                );
+            }
+        }
+        return null;
     }
 
 }
