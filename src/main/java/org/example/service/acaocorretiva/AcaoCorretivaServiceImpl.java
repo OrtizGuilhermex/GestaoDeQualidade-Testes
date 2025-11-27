@@ -23,7 +23,9 @@ public class AcaoCorretivaServiceImpl implements AcaoCorretivaService{
 
         acaoCorretivaRepository.registrarConclusaoDeAcao(acao);
         acaoCorretivaRepository.AtualizarAcaoCorretivaFalhaResolvida(acao);
-        return acaoCorretivaRepository.AtualizarAcaoCorretivaEquipamento(acao);
+        acaoCorretivaRepository.AtualizarAcaoCorretivaEquipamento(acao);
+
+        return acao;
     }
 }
 
