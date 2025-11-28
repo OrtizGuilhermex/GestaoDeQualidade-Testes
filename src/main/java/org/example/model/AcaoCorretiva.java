@@ -1,21 +1,5 @@
 package org.example.model;
 
-
-/*CREATE TABLE IF NOT EXISTS AcaoCorretiva (
-        id BIGINT AUTO_INCREMENT PRIMARY KEY,
-        falhaId BIGINT NOT NULL,
-        dataHoraInicio DATETIME NOT NULL,
-        dataHoraFim DATETIME NOT NULL,
-        responsavel VARCHAR(255) NOT NULL,
-descricaoAcao TEXT NOT NULL,
-
-    -- Chave estrangeira ligando a Ação à Falha
-CONSTRAINT fk_acao_falha
-FOREIGN KEY (falhaId)
-REFERENCES Falha(id)
-ON DELETE RESTRICT -- Impede excluir uma falha se ela tiver ações corretivas
-);*/
-
 import java.time.LocalDateTime;
 
 public class AcaoCorretiva {

@@ -4,6 +4,8 @@ import org.example.database.Conexao;
 import org.example.model.AcaoCorretiva;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AcaoCorretivaRepository {
 
@@ -77,4 +79,26 @@ public class AcaoCorretivaRepository {
         return acaoCorretiva;
     }
 
+    public List<String> buscarAcaoCorretivaPorIdFalha (long idFalha) throws SQLException {
+        List<String> acoes = new ArrayList<>();
+        String query = """
+                SELECT descricaoAcao
+                FROM AcaoCorretiva
+                WHERE falhaId = ?
+                """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS  )){
+
+            stmt.setLong(1,idFalha);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+                String descricaoAcao = rs.getString("descricaoAcao");
+                acoes.add(descricaoAcao);
+            }
+        }
+        return acoes;
+    }
 }
