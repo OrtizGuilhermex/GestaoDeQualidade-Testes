@@ -1,14 +1,11 @@
 package org.example.service.acaocorretiva;
 
-import org.example.dto.EquipamentoContagemFalhasDTO;
 import org.example.model.AcaoCorretiva;
 import org.example.model.Falha;
 import org.example.repository.AcaoCorretivaRepository;
 import org.example.repository.FalhaRepository;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AcaoCorretivaServiceImpl implements AcaoCorretivaService{
 

@@ -1,9 +1,7 @@
 package org.example.repository;
 
 import org.example.database.Conexao;
-import org.example.dto.FalhaDetalhadaDTO;
 import org.example.dto.RelatorioParadaDTO;
-import org.example.model.Equipamento;
 import org.example.model.Falha;
 
 import java.math.BigDecimal;
@@ -11,7 +9,6 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class FalhaRepository {
 
@@ -134,7 +131,7 @@ public class FalhaRepository {
                 ,e.nome
                 ,f.tempoParadaHoras
                 FROM Falha f
-                JOIN Equipamento e ON f.equipamentoId = e.id; 
+                JOIN Equipamento e ON f.equipamentoId = e.id;
                 """;
 
         try (Connection conn = Conexao.conectar();
@@ -151,13 +148,6 @@ public class FalhaRepository {
             }
         }
         return falhas;
-    }
-
-    public Optional<FalhaDetalhadaDTO> buscarDetalhesCompletosFalha(long falhaId) throws SQLException{
-
-
-
-        return null;
     }
 
 }

@@ -1,7 +1,6 @@
 package org.example.repository;
 
 import org.example.database.Conexao;
-import org.example.dto.EquipamentoContagemFalhasDTO;
 import org.example.model.AcaoCorretiva;
 
 import java.sql.*;

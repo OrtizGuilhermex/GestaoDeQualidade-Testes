@@ -38,7 +38,6 @@ public class RelatorioServiceImpl implements RelatorioService{
         }
 
         Equipamento equipamento = equipamentoRepository.buscarEquipamento(falha.getEquipamentoId());
-
         if(equipamento == null){
             throw new RuntimeException();
         }
